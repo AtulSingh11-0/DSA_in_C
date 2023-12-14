@@ -46,7 +46,7 @@ void main() {
       break;
     case 4:
       if (!isempty(q)) {
-        printf("\nValues int queue : ");
+        printf("\nValues int queue : \n");
         disp(q);
       } else
         printf("\nNothing to display");
@@ -59,55 +59,56 @@ void main() {
   }
 }
 
-void enque(qu * q, int p) {
-  if (q -> rear == -1)
-    q -> rear = q -> front = 0;
-  else if (q -> rear == max - 1)
+void enque(qu *q , int val) {
+  if(q -> rear == -1)
+    q -> front = q -> rear = 0;
+  else if(q -> rear == max - 1){
     q -> rear = 0;
-  else
+  } else 
     q -> rear++;
-  q -> val[q -> rear] = p;
+  q -> val[q -> rear] = val;
 }
 
-int deque(qu * q) {
-  int g;
-  g = q -> val[q -> front];
-  if (q -> front == q -> rear)
-    q -> rear = q -> front = -1;
-  else if (q -> front == max - 1)
+int deque(qu *q) {
+  int v = q -> val[q -> rear];
+  if(q -> front == q -> rear)
+    q -> front = q -> rear = -1;
+  else if(q -> front == max - 1)
     q -> front = 0;
-  else
-    q -> front++;
-  return g;
+  else 
+    q -> rear++;
+  return v;
 }
 
 int peek(qu q) {
-  return q.val[q.front];
+  return q.val[q.rear];
 }
-
 int isempty(qu q) {
-  if ((q.front == -1 && q.rear == -1))
+  if(q.front == -1 && q.rear == -1)
     return 1;
   else
     return 0;
 }
 
 int isfull(qu q) {
-  if ((q.front == 0 && q.rear == max - 1) || q.front == q.rear + 1)
+  if( (q.front == 0 && q.rear == max-1) || q.front == q.rear+1)
     return 1;
   else
     return 0;
 }
 
 void disp(qu q) {
-  int i;
-  if (q.front > q.rear) {
-    for (i = q.front; i <= max - 1; i++)
-      printf("%d,", q.val[i]);
-
-    for (i = 0; i <= q.rear; i++)
-      printf("%d,", q.val[i]);
-  } else
-    for (i = q.front; i <= q.rear; i++)
-      printf("%d,", q.val[i]);
+  int i = q.front;
+  printf("\n|");
+  if( q.front > q.rear) {
+    for(; i <= max-1; i++)
+      printf(" %d |", q.val[i]);
+    
+    for(i = 0; i <= q.rear; i++)
+      printf(" %d |", q.val[i]);
+  } else {
+    for(; i <= q.rear; i++)
+      printf(" %d |", q.val[i]);
+  }
+  printf("\n");
 }
